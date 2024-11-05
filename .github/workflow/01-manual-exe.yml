@@ -1,0 +1,16 @@
+name: Cypress Tests
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:      
+      - uses: actions/checkout@v4     
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'      
+      - name: Instalando dependências (yarn global)
+        run: npm install -g yarn      
+      - name: Instalando dependências
+        run: yarn     
+      - name: Executando testes Cypress
+        run: yarn run cypress run
