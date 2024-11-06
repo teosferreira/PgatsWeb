@@ -7,8 +7,11 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4     
-      - uses: actions/setup-node@v4
+      - name: Checkout do repositório
+        uses: actions/checkout@v3  # Usando a versão estável
+
+      - name: Configuração do Node.js
+        uses: actions/setup-node@v3  # Usando a versão estável
         with:
           node-version: 'lts/*'
 
@@ -19,7 +22,10 @@ jobs:
         run: npm install -g yarn
 
       - name: Instalando dependências do projeto
-        run: yarn
+        run: yarn install
+
+      - name: Verificando versão do Cypress
+        run: npx cypress --version  # Para garantir que o Cypress foi instalado corretamente
 
       - name: Executando testes Cypress
         run: yarn run cypress run
